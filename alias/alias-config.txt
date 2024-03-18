@@ -1,0 +1,79 @@
+
+
+    ll='ls -l'
+
+    swagger-up='cd ~/docker/swagger/ && docker-compose up'
+    swagger-down='cd ~/docker/swagger/ && docker-compose down'
+
+    hoverctl start
+    hoverctl logs
+    hoverctl stop
+
+    spring
+
+    h2-up='cd ~/docker/h2/ && docker-compose up && sh runner-cmd.sh'
+    h2-down='cd ~/docker/h2/ && docker-compose down'
+
+    casandra-up='cd ~/docker/casandra/ && docker-compose up'
+    casandra-down='cd ~/docker/casandra/ && docker-compose down'
+
+    mysql-up='cd ~/docker/mysql/ && docker-compose up'
+    mysql-down='cd ~/docker/mysql/ && docker-compose down'
+
+    postgres-up='cd ~/docker/postgres/ && docker-compose up'
+    postgres-down='cd ~/docker/postgres/ && docker-compose down'
+
+    mongo-up='cd ~/docker/mongo/ && docker-compose up'
+    mongo-down='cd ~/docker/mongo/ && docker-compose down'
+
+    redis-up='cd ~/docker/redis/ && docker-compose up'
+    redis-down='cd ~/docker/redis/ && docker-compose down'
+
+
+    nifi-up='cd ~/docker/nifi/ && docker-compose up && sh runner-cmd.sh'
+    nifi-down='cd ~/docker/nifi/ && docker-compose down'
+
+
+    zookeeper-up='cd ~/docker/zookeeper/ && docker-compose up && sh runner-cmd.sh'
+    zookeeper-cli='cd ~/docker/zookeeper/ && docker-compose exec zookeeper-cli zkCli.sh -server zookeeper:2181'
+    zookeeper-down='cd ~/docker/zookeeper/ && docker-compose down'
+
+    zeppelin-up='cd ~/docker/zeppelin/ && docker-compose up && sh runner-cmd.sh'
+    zeppelin-down='cd ~/docker/zeppelin/ && docker-compose down'
+
+
+
+    rabbit-up='cd ~/docker/rabbitMQ/ && docker-compose up'
+    rabbit-down='cd ~/docker/rabbitMQ/ && docker-compose down'
+
+    kafka-up='cd ~/docker/kafka/ && docker-compose up'
+    kafka-down='cd ~/docker/kafka/ && docker-compose down'
+
+
+
+    nginx-up='cd ~/docker/nginx/ && docker-compose up && sh runner-cmd.sh'
+    nginx-cli='cd ~/docker/nginx && docker-compose run cli'
+    nginx-down='cd ~/docker/nginx/ && docker-compose down'
+
+    oauth2-up='cd ~/docker/oauth2/ && docker-compose up'
+    oauth2-down='cd ~/docker/oauth2/ && docker-compose down'
+
+
+
+    prometheus-up='cd ~/docker/prometheus/ && docker-compose up && sh runner-cmd.sh'
+    prometheus-down='cd ~/docker/prometheus/ && docker-compose down'
+
+    grafana-up='cd ~/docker/grafana/ && docker-compose up && sh runner-cmd.sh'
+    grafana-down='cd ~/docker/grafana/ && docker-compose down'
+
+
+
+    efk-up='cd ~/docker/efk/ && docker-compose up && sh runner-cmd.sh'
+    efk-down='cd ~/docker/efk/ && docker-compose down'
+
+    elk-up='cd ~/docker/elk/ && docker-compose up && sh runner-cmd.sh'
+    elk-down='cd ~/docker/elk/ && docker-compose down'
+
+
+    solr-up='cd ~/docker/solr/ && docker-compose up && sh runner-cmd.sh'
+    solr-down='cd ~/docker/solr/ && docker-compose down'
