@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: swagger
+    ports:
+      - '90:8090'
+    volumes:
+      - ./doc:/usr/share/nginx/html/doc
+    environment:
+      URLS_PRIMARY_NAME: "sample"
+      URLS: "[{ url: 'doc/openapi.yml',  name: 'UserManagement'},
+              { url: 'doc/checkapi.yml', name: 'CheckServer'},
+              { url: 'doc/sample.yml',   name: 'sample'},
+            ]"

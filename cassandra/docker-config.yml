@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  cassandra:
+    image: cassandra:3.11.11
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+      - "9160:9160"
+    volumes:
+      - ./data:/var/lib/cassandra
+    restart: always
+
+  cassandra-exporter:
+    image: cassandra-exporter:0.12.0
+    ports:
+      - "8080:8080"
+    environment:
+      - CASSANDRA_EXPORTER_HOST=cassandra
+      - CASSANDRA_EXPORTER_PORT=9042
+      - CASSANDRA_EXPORTER_USERNAME=your_cassandra_username
+      - CASSANDRA_EXPORTER_PASSWORD=your_cassandra_password
+    depends_on:
+      - cassandra

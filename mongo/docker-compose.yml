@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  mongodb:
+    container_name: mongo
+    image: mongo:5.0
+    hostname: mongo_1
+    command: --replSet rs1 --keyFile /etc/mongo-replication.key
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - 127.0.10.1:27017:27017
+    volumes:
+      - mongodb_data_1:/data/db
+      - ./mongo-replication.key:/etc/mongo-replication.key
+
+  mongo-exporter:
+    image: bitnami/mongodb-exporter:0.20.7
+    ports:
+      - "9216:9216"
+    environment:
+      MONGODB_URI: "mongodb://mongodb:27017"
+    restart: always
+
+volumes:
+  mongodb_data_1:

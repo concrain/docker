@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  redis:
+    container_name: redis
+    image: redis:6.2.5-alpine
+    ports:
+      - "6379:6379"
+    restart: always
+
+  redis-exporter:
+    image: oliver006/redis_exporter:v1.22.0
+    ports:
+      - "9121:9121"
+    environment:
+      - REDIS_ADDR=redis:6379
+      - REDIS_PASSWORD=
+      - REDIS_DB=0
+    restart: always

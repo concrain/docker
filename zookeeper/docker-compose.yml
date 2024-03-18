@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  zoo1:
+    container_name: zookeeper_1
+    image: zookeeper:3.6.3
+    hostname: zoo1
+    ports:
+      - "2181:2181"
+    networks:
+      - zookeeper-exporter-network
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+    restart: always
+
+  zoo2:
+    container_name: zookeeper_2
+    image: zookeeper:3.6.3
+    hostname: zoo2
+    ports:
+      - "2182:2181"
+    networks:
+      - zookeeper-exporter-network
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+    restart: always
+
+  zoo3:
+    container_name: zookeeper_3
+    image: zookeeper:3.6.3
+    hostname: zoo3
+    ports:
+      - "2183:2181"
+    networks:
+      - zookeeper-exporter-network
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+    restart: always
+
+  zookeeper-exporter:
+    image: bitnami/zookeeper-exporter:latest
+    environment:
+      ZOOKEEPER_SERVERS: zoo1:2181,zoo2:2181,zoo3:2181
+      ZOOKEEPER_EXPORTER_PORT: 9114
+    ports:
+      - 9114:9114
+    restart: always
+
+  zookeeper-cli:
+    image: zookeeper:3.6.3
+    entrypoint: sh
+    tty: true
+    depends_on:
+      - zoo1
+      - zoo2
+      - zoo3
+    restart: always
+
+networks:
+  zookeeper-exporter-network:
+    driver: bridge

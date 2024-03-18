@@ -1,0 +1,76 @@
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 15s
+
+rule_files:
+  - alert.yml
+
+scrape_configs:
+  - job_name: services
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'prometheus:9090'
+          - 'idonotexists:564'
+  - job_name: 'zookeeper'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['zookeeper-exporter:9114']
+  - job_name: 'solr'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['solr:8983']
+  - job_name: 'kafka'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['kafka-exporter:9308']
+  - job_name: 'rabbitmq'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['rabbitmq:15672']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: rabbitmq-exporter:9419
+  - job_name: 'oauth2-server'
+    static_configs:
+      - targets: ['oauth2-server:9777']
+  - job_name: 'nginx'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['nginx-exporter:9113']
+  - job_name: redis
+    static_configs:
+      - targets: ['redis-exporter:9121']
+  - job_name: 'mongodb-exporter'
+    static_configs:
+      - targets: ['mongodb-exporter:9111']
+  - job_name: postgresql
+    static_configs:
+      - targets: ['db:5432']
+    metrics_path: /metrics
+    params:
+      format: [prometheus]
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: node-exporter:9100
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+  - job_name: 'mysql'
+    static_configs:
+      - targets: ['db:3306']
+  - job_name: 'cassandra'
+    static_configs:
+      - targets: ['cassandra-exporter:8080']
+  - job_name: 'nifi'
+    static_configs:
+      - targets: ['nifi:8091']
