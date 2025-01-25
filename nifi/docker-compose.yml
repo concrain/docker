@@ -10,7 +10,7 @@ services:
             - ALLOW_ANONYMOUS_LOGIN=yes
         networks:
             - nifi_persistent_network
-# version control for nifi flows
+    # version control for nifi flows
     registry:
         hostname: nifi-registry
         container_name: nifi-registry
@@ -28,7 +28,7 @@ services:
             - ./nifi_registry/flow_storage:/opt/nifi-registry/nifi-registry-current/flow_storage
         networks:
             - nifi_persistent_network
-# data extraction, transformation and load service
+    # data extraction, transformation and load service
     nifi:
         hostname: nifi
         container_name: nifi

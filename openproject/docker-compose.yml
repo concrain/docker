@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  openproject:
+    image: openproject/community:12
+    container_name: openproject
+    ports:
+      - "90:80"
+    environment:
+      OPENPROJECT_SECRET_KEY_BASE: secret
+      OPENPROJECT_HOST__NAME: localhost:90
+      OPENPROJECT_HTTPS: "false"
+    volumes:
+      - openproject:/var/lib/openproject
+    restart: always
+
+volumes:
+  openproject:

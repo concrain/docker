@@ -1,0 +1,23 @@
+version: '3'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node  # for single-node mode
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g  # JVM memory settings
+    ports:
+      - "9200:9200"  # Expose port 9200 for REST API
+      - "9300:9300"  # Expose port 9300 for internal node communication
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data  # Named volume for persistent data
+    networks:
+      - es_network
+
+volumes:
+  elasticsearch:
+    driver: local
+
+networks:
+  es_network:
+    driver: bridge
